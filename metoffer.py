@@ -186,12 +186,12 @@ class MetOffer():
         page = url_lib.urlopen(url)
         pg = page.read()
         return pg
-    
+
     def loc_forecast(self, request, step, isotime=None):
         """
         Return location-specific forecast data (including lists of available
         sites and time capabilities) for given time step.
-        
+
         request:
             metoffer.SITELIST        Returns available sites
             metoffer.CAPABILITIES    Returns available times
@@ -214,7 +214,7 @@ class MetOffer():
         """
         Work out nearest possible site to lat & lon coordinates
         and return its forecast data for the given time step.
-        
+
         lat:                        float or int.  Latitude.
         lon:                        float or int.  Longitude.
         step:
@@ -225,14 +225,14 @@ class MetOffer():
         sites = parse_sitelist(sitelist)
         site = get_nearest_site(sites, lat, lon)
         return self.loc_forecast(site, step)
-        
+
 
     def loc_observations(self, request):
         """
         Return location-specific observation data, including a list of sites
         (time step will be HOURLY).
-        
-        request: 
+
+        request:
             metoffer.SITELIST        Returns available sites
             metoffer.CAPABILITIES    Returns available times
             site ID, e.g. "3021"     Returns observation data for site
@@ -244,7 +244,7 @@ class MetOffer():
         """
         Work out nearest possible site to lat & lon coordinates
         and return observation data for it.
-        
+
         lat:    float or int.  Latitude.
         lon:    float or int.  Longitude.
         """
@@ -257,7 +257,7 @@ class MetOffer():
         """
         Return textual forecast data for regions, national parks or mountain
         areas.
-        
+
         field:
             metoffer.NATIONAL_PARK           Data on national parks
             metoffer.REGIONAL_FORECAST       Regional data (see REGIONS)
@@ -276,7 +276,7 @@ class MetOffer():
     def text_uk_extremes(self, request):
         """
         Return textual data of UK extremes.
-        
+
         request:
             metoffer.CAPABILITIES            Returns available extreme date
                                              and issue time
@@ -344,7 +344,7 @@ def get_nearest_site(sites, lat, lon):
     """
     Return a string which can be used as "request" in calls to loc_forecast
     and loc_observations.
-    
+
     sites:    List of Site instances
     lat:      float or int.  Interesting latitude
     lon:      float or int.  Interesting longitude
@@ -408,7 +408,7 @@ class Weather():
         data_key = extract_data_key(returned_data)
         self.data = []
         for weather in _weather_dict_gen(returned_data, data_key):
-            data.append(weather)
+            self.data.append(weather)
 
 
 class TextForecast():
